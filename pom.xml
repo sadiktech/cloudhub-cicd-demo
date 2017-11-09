@@ -118,7 +118,7 @@
 		               <password>Tigo@1357</password>
 		               <workerType>Micro</workerType>
 		               <redeploy>true</redeploy>
-		               <environment>SANDBOX</environment>
+		               <environment>Sandbox</environment>
 		            </configuration>
 		            <executions>
 		               <execution>
