@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mock="http://www.mulesoft.org/schema/mule/mock" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:cloudhub-cicd-demo.xml"/>
+    </spring:beans>
+    <munit:test name="cloudhub-cicd-demo-test-suite-CloudHubCiCD-FirstTest" description="Test">
+        <mock:when messageProcessor="vm:outbound-endpoint" doc:name="Mock">
+            <mock:then-return payload="#[payload]"/>
+        </mock:when>
+        <munit:set payload="#[&quot;Lucknow&quot;]" doc:name="Set Message"/>
+        <flow-ref name="CloudHubCiCD-First" doc:name="Flow-ref to CloudHubCiCD-First"/>
+        <munit:assert-not-same message="#[&quot;This is correct result&quot;]" expectedValue="#[&quot;Lucknow&quot;]" actualValue="#[payload]" doc:name="Assert Not Equals"/>
+    </munit:test>
+    <munit:test name="cloudhub-cicd-demo-test-suite-CloudHubCiCD-SecondTest" description="Test">
+        <mock:when messageProcessor="vm:inbound-endpoint" doc:name="Mock">
+            <mock:then-return payload="#[payload]"/>
+        </mock:when>
+        <mock:when doc:name="Mock" messageProcessor="vm:outbound-endpoint">
+            <mock:then-return payload="#[payload]"/>
+        </mock:when>
+        <munit:set payload="#[&quot;Delhi&quot;]" doc:name="Set Message"/>
+        <flow-ref name="CloudHubCiCD-Second" doc:name="Flow-ref to CloudHubCiCD-Second"/>
+        <munit:assert-not-same expectedValue="#[&quot;Delhi&quot;]" actualValue="#[payload]" doc:name="Assert Not Equals"/>
+    </munit:test>
+</mule>
