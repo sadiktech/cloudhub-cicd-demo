@@ -115,7 +115,7 @@
 		               <deploymentType>cloudhub</deploymentType>
 		               <muleVersion>${mule.version}</muleVersion>
 		               <username>ali786</username>
-		               <password>Tigo@1357</password>
+		               <password>${pwd}</password>
 		               <workerType>Micro</workerType>
 		               <redeploy>true</redeploy>
 		               <environment>Sandbox</environment>
