@@ -118,7 +118,7 @@
 		               <password>${pwd}</password>
 		               <workerType>Micro</workerType>
 		               <redeploy>true</redeploy>
-		               <environment>Production</environment>
+		               <environment>SANDBOX</environment>
 		            </configuration>
 		            <executions>
 		               <execution>
